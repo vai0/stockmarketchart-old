@@ -25,8 +25,14 @@ $spinkit-spinner-color: #673AB7;
       border: 1px solid red;
       padding: 5% 14% 5% 15%;
 
-      .Stock-left {
+      .Stock-right {
+        display: flex;
+        flex-direction: row;
 
+        .buttons {
+          display: flex;
+          flex-direction: column;
+        }
       }
     }
   }
