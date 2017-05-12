@@ -12,32 +12,66 @@ $spinkit-spinner-color: #673AB7;
     @extend .sk-folding-cube;
   }
 
-  .StockList {
+  .container-left {
     width: 30%;
     min-width: 280px;
     border: 3px solid black;
 
-    .Stock {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid red;
-      padding: 5% 14% 5% 15%;
+    .StockList {
 
-      .Stock-right {
+      .Stock {
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid red;
+        padding: 5% 14% 5% 15%;
 
-        .buttons {
+        .Stock-right {
           display: flex;
-          flex-direction: column;
+          flex-direction: row;
+
+          .buttons {
+            display: flex;
+            flex-direction: column;
+          }
         }
       }
     }
   }
 
-  #Graph {
+  .container-right {
     width: 70%;
+
+    .Searchbar {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100px;
+    }
+
+    .suggestion {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      background-color: white;
+      padding: 10px;
+      border: 1px solid black;
+
+      .suggestion-left {
+        .suggestion-name {
+          font-size: 0.8em;
+        }
+      }
+    }
+
+    .react-autosuggest__suggestions-container {
+      position: absolute;
+      z-index: 1;
+    }
+
+    .react-autosuggest__input {
+      width: 200px;
+    }
   }
 }

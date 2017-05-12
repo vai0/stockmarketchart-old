@@ -30,8 +30,9 @@
   "dependencies": {
     "axios": "^0.16.1",
     "babel-cli": "^6.24.1",
+    "debounce": "^1.0.2",
     "highcharts": "^5.0.10",
-    "moment": "^2.18.1",
+    "jsonp": "^0.2.1",
     "react-autosuggest": "^9.0.1",
     "spinkit": "^1.2.5"
   }
