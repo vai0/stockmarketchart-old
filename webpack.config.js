@@ -27,7 +27,29 @@ module.exports = {
         }, {
           loader: "sass-loader",
         }]
-      }
+      },
+      {
+        test: /\.woff2?$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name: './css/fonts/[hash].[ext]',
+            limit: 50000,
+            mimetype: 'application/font-woff',
+          },
+        }
+      },
+      {
+        test: /\.woff?$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name: './css/fonts/[hash].[ext]',
+            limit: 50000,
+            mimetype: 'application/font-woff',
+          },
+        }
+      },
     ]
   },
   resolve: {

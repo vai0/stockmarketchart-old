@@ -19,6 +19,7 @@ module.exports = {
   },
 
   appendSign: function(number) {
-    return number > 0 ? '+' + number.toString() : number.toString();
+    var abs = Math.abs(number)
+    return number > 0 ? '+ ' + abs.toString() : '- ' + abs.toString();
   }
 }

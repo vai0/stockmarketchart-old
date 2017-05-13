@@ -17,7 +17,6 @@ class Searchbar extends React.Component {
     this._onSuggestionsClearRequested = this._onSuggestionsClearRequested.bind(this);
     this._loadSuggestions = this._loadSuggestions.bind(this);
     this.debouncedLoadSuggestions = debounce(this._loadSuggestions, 300);
-    // this._renderSuggestionsContainer = this._renderSuggestionsContainer.bind(this);
 
     // Autosuggest is a controlled component.
     // This means that you need to provide an input value
@@ -65,27 +64,6 @@ class Searchbar extends React.Component {
   // input value for every given suggestion.
   _getSuggestionValue(suggestion) {
       return suggestion.Symbol.trim().toUpperCase();
-  }
-
-  _renderSuggestionsContainer({ containerProps , children }) {
-    // var symbols = this.props.stocks.map(stock => stock.name);
-    // var childrenWithProps;
-    //
-    // if (children) {
-    //    childrenWithProps = React.Children.map(children,
-    //    (child) => React.cloneElement(child, {
-    //      existingSymbols: symbols
-    //    })
-    // );
-    //
-    // console.log('childrenWithProps: ', childrenWithProps);
-    //
-    // }
-    // return (
-    //   <div {...containerProps}>
-    //     {childrenWithProps}
-    //   </div>
-    // );
   }
 
   // Use your imagination to render suggestions.

@@ -1,35 +1,156 @@
 @import '_reset';
 @import '../node_modules/spinkit/scss/spinners/11-folding-cube';
 $spinkit-spinner-color: #673AB7;
+$faded-purple: #2F2F40;
+$deep-purple: #242434;
+$text-color: #9AA5BC;
+
+@font-face {
+  font-family: 'Avenir-Next-Regular';
+  src:  url('../fonts/avenir-next-regular.woff2') format('woff2'),
+        url('../fonts/avenir-next-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Avenir-Next-Medium';
+  src:  url('../fonts/avenir-next-medium.woff2') format('woff2'),
+        url('../fonts/avenir-next-medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Avenir-Next-Demibold';
+  src:  url('../fonts/avenir-next-demibold.woff2') format('woff2'),
+        url('../fonts/avenir-next-demibold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Avenir-Next-Bold';
+  src:  url('../fonts/avenir-next-bold.woff2') format('woff2'),
+        url('../fonts/avenir-next-bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Avenir-Next-Ultralight';
+  src:  url('../fonts/avenir-next-ultralight.woff2') format('woff2'),
+        url('../fonts/avenir-next-ultralight.woff') format('woff');
+}
+
+body {
+  overflow-x: hidden;
+}
 
 .App {
   display: flex;
   flex-direction: row;
   height: 97vh;
   align-items: center;
+  font-family: 'Avenir-Next-Regular', Verdana, Geneva, sans-serif;
 
   .LoadingIcon {
     @extend .sk-folding-cube;
   }
 
   .container-left {
-    width: 30%;
+    width: 25%;
     min-width: 280px;
-    border: 3px solid black;
+    height: 100%;
+    // border: 1px solid black;
+    background-color: $faded-purple;
 
     .StockList {
+
+      .title {
+        font-size: 1.1em;
+        color: $text-color;
+        margin-left: 10px;
+        padding-left: 12%;
+        margin-top: 20%;
+        margin-bottom: 7%;
+
+        &:after {
+          content: " ";
+          border-bottom: 1px solid #39455C;
+          width: 70%;
+          display: block;
+          margin-top: 40px;
+
+        }
+      }
 
       .Stock {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        border: 1px solid red;
-        padding: 5% 14% 5% 15%;
+        height: 60px;
+        margin: 4px 0 4px 0;
+        position: relative;
 
-        .Stock-right {
+        .color-tab {
+          height: 100%;
+          width: 10px;
+        }
+
+        .stock-fly-in {
           display: flex;
           flex-direction: row;
+          justify-content: space-between;
+          width: 100%;
+          position: absolute;
+          height: 60px;
+          background-color: blue;
+          transition: transform .2s cubic-bezier(0.02, 0.51, 0.58, 1);
+
+          .stock-left {
+            color: $faded-purple;
+            padding-left: 12%;
+            margin-left: 8px;
+          }
+
+          .stock-right {
+            padding-right: 10%;
+          }
+        }
+
+        .stock-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 100%;
+          padding: 0 10% 0 12%;
+        }
+
+        .stock-left {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          color: $text-color;
+
+          .stock-symbol {
+            font-family: 'Avenir-Next-Demibold', Verdana, Geneva, sans-serif;
+            font-size: 1.1em;
+            margin-bottom: 6px;
+          }
+
+          .stock-fullName {
+            font-size: 0.8em;
+          }
+        }
+
+        .stock-right {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-end;
+
+          .stock-price {
+            margin-bottom: 5px;
+          }
+
+          .stock-changePercent {
+            font-size: 0.8em;
+          }
 
           .buttons {
             display: flex;
@@ -41,7 +162,7 @@ $spinkit-spinner-color: #673AB7;
   }
 
   .container-right {
-    width: 70%;
+    width: 75%;
 
     .Searchbar {
       position: relative;

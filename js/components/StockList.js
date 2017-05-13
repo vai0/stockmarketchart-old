@@ -9,6 +9,7 @@ class StockList extends React.Component {
   render() {
     return (
       <div className="StockList">
+        <div className="title">My Stocks</div>
         {this.props.stocks.map(function(stock, i) {
           return <Stock stock={stock} key={i} _removeStock={this.props._removeStock} _toggleVisibility={this.props._toggleVisibility}/>
         }, this)}
