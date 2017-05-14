@@ -6,8 +6,6 @@ import StockList from 'components/StockList';
 import Graph from 'components/Graph';
 import Searchbar from 'components/Searchbar';
 
-import 'css/App.scss';
-
 class App extends React.Component {
   constructor(props) {
     super(props);

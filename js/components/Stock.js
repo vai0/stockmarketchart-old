@@ -1,4 +1,4 @@
-import React from 'react';
+  import React from 'react';
 import * as helper from 'helpers'
 
 class Stock extends React.Component {
@@ -21,14 +21,15 @@ class Stock extends React.Component {
   _renderButtons() {
     return (
       <div className="buttons">
-        <button className="stock-remove-button" onClick={this._onRemoveStock}>X</button>
-        <button className="stock-view-button" onClick={this._handleViewClick}>V</button>
+        <div className="stock-view-button" onClick={this._handleViewClick}></div>
+        <div className="stock-remove-button" onClick={this._onRemoveStock}></div>
       </div>
     );
   }
 
   _renderColorTab() {
-    return (this.props.stock.visibility) ? <div className="color-tab" style={{ backgroundColor: this.props.stock.color }}></div> : null;
+    return (this.props.stock.visibility === 'on') ?
+      <div className="color-tab" style={{ backgroundColor: this.props.stock.color }}></div> : null;
   }
 
   componentDidMount() {
@@ -37,20 +38,23 @@ class Stock extends React.Component {
     var stockFlyIn = this.refs.stockFlyIn;
 
     // hide stock-fly-in div
-    var stockFlyInOffset = stockContainer.offsetWidth + 8;
+    var stockFlyInOffset = stockContainer.offsetWidth;
     stockFlyIn.style.transform = 'translate3d(-' + stockFlyInOffset + 'px, 0, 0)';
+    stockFlyIn.style.display = 'flex';
 
     window.addEventListener('resize', function(e) {
-      stockFlyInOffset = stockContainer.offsetWidth + 8;
+      stockFlyInOffset = stockContainer.offsetWidth;
       stockFlyIn.style.transform = 'translate3d(-' + stockFlyInOffset + 'px, 0, 0)';
     })
 
     stock.addEventListener('mouseover', function(e) {
       stockFlyIn.style.transform = 'translate3d(0, 0, 0)';
+      stockContainer.style.transform = 'translate3d(' + stockFlyInOffset + 'px, 0, 0)';
     });
 
     stock.addEventListener('mouseout', function(e) {
       stockFlyIn.style.transform = 'translate3d(-' + stockFlyInOffset + 'px, 0, 0)';
+      stockContainer.style.transform = 'translate3d(0, 0, 0)';
     });
   }
 

@@ -3,8 +3,8 @@ import Autosuggest from 'react-autosuggest';
 import axios from 'axios';
 import jsonp from 'jsonp';
 import debounce from 'debounce';
-
 import Suggestion from 'components/Suggestion';
+import searchIcon from 'images/search_icon.svg';
 
 class Searchbar extends React.Component {
   constructor(props) {
@@ -17,6 +17,8 @@ class Searchbar extends React.Component {
     this._onSuggestionsClearRequested = this._onSuggestionsClearRequested.bind(this);
     this._loadSuggestions = this._loadSuggestions.bind(this);
     this.debouncedLoadSuggestions = debounce(this._loadSuggestions, 300);
+    this._onSuggestionSelected = this._onSuggestionSelected.bind(this);
+    this._renderInputComponent = this._renderInputComponent.bind(this);
 
     // Autosuggest is a controlled component.
     // This means that you need to provide an input value
@@ -63,8 +65,14 @@ class Searchbar extends React.Component {
   // based on the clicked suggestion. Teach Autosuggest how to calculate the
   // input value for every given suggestion.
   _getSuggestionValue(suggestion) {
-      return suggestion.Symbol.trim().toUpperCase();
+    return suggestion.Symbol.trim().toUpperCase();
   }
+
+  _onSuggestionSelected() {
+    this.setState({
+      value: ''
+    });
+  };
 
   // Use your imagination to render suggestions.
   _renderSuggestion(suggestion) {
@@ -78,6 +86,15 @@ class Searchbar extends React.Component {
     }
     return <Suggestion stockExists={stockExists} suggestion={suggestion} _addStock={this.props._addStock} />;
   }
+
+  _renderInputComponent(inputProps) {
+    return (
+      <div className="inputContainer">
+        <span className="search-icon"></span>
+        <input {...inputProps} />
+      </div>
+    );
+  };
 
   // Autosuggest will call this function every time you need to clear suggestions.
   _onSuggestionsClearRequested() {
@@ -98,12 +115,14 @@ class Searchbar extends React.Component {
 
     // Finally, render it!
     return (
-      <Autosuggest className="Searchbar"
+      <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={this._onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this._onSuggestionsClearRequested}
         getSuggestionValue={this._getSuggestionValue}
+        onSuggestionSelected={this._onSuggestionSelected}
         renderSuggestion={this._renderSuggestion}
+        renderInputComponent={this._renderInputComponent}
         inputProps={inputProps}
       />
     );

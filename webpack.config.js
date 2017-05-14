@@ -4,6 +4,7 @@ var path = require('path');
 module.exports = {
   entry: './js/main.js',
   output: {
+    path: '/build', // This is where images AND js will go
     filename: 'bundle.js'
   },
   module: {
@@ -29,7 +30,7 @@ module.exports = {
         }]
       },
       {
-        test: /\.woff2?$/,
+        test: /\.(woff2|woff)$/,
         use: {
           loader: 'url-loader',
           options: {
@@ -40,16 +41,14 @@ module.exports = {
         }
       },
       {
-        test: /\.woff?$/,
+        test: /\.(svg|png|jpg)$/,
         use: {
           loader: 'url-loader',
           options: {
-            name: './css/fonts/[hash].[ext]',
-            limit: 50000,
-            mimetype: 'application/font-woff',
-          },
+            limit: '8192'
+          }
         }
-      },
+      }
     ]
   },
   resolve: {
