@@ -49,7 +49,7 @@ class Searchbar extends React.Component {
       } else {
         console.log('data: ', data);
         self.setState({
-          suggestions: data
+          suggestions: data.slice(0, 7)
         });
       }
     });
@@ -108,7 +108,7 @@ class Searchbar extends React.Component {
 
     // Autosuggest will pass through all these props to the input element.
     const inputProps = {
-      placeholder: 'Search for stock by symbol...',
+      placeholder: 'Search for stock...',
       value,
       onChange: this._onChange,
     };

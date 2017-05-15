@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="35px" height="35px" viewBox="0 0 35 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>delete stock icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="delete-stock-icon" stroke="#2F2F40" stroke-width="2.0625">
+            <g transform="translate(1.000000, 1.000000)">
+                <circle id="Oval-3" cx="16.5" cy="16.5" r="16.5"></circle>
+                <g id="Group-2" transform="translate(11.550000, 11.550000)" stroke-linecap="square">
+                    <path d="M10.4590987,0.484434159 L0.153138946,10.7903939" id="Line"></path>
+                    <path d="M0.387400038,0.718695251 L10.2248376,10.5561329" id="Line"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

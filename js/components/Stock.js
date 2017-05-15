@@ -19,17 +19,17 @@ class Stock extends React.Component {
   }
 
   _renderButtons() {
+    var viewButtonClass = (this.props.stock.visibility === 'on') ? 'stock-view-show-button stock-button' : 'stock-view-hidden-button stock-button';
     return (
       <div className="buttons">
-        <div className="stock-view-button" onClick={this._handleViewClick}></div>
-        <div className="stock-remove-button" onClick={this._onRemoveStock}></div>
+        <span className={viewButtonClass} onClick={this._handleViewClick}></span>
+        <span className="stock-remove-button stock-button" onClick={this._onRemoveStock}></span>
       </div>
     );
   }
 
   _renderColorTab() {
-    return (this.props.stock.visibility === 'on') ?
-      <div className="color-tab" style={{ backgroundColor: this.props.stock.color }}></div> : null;
+    return (this.props.stock.visibility === 'on') ? <div className="color-tab" style={{ backgroundColor: this.props.stock.color }}></div> : null;
   }
 
   componentDidMount() {
@@ -66,7 +66,7 @@ class Stock extends React.Component {
         <div className="stock-fly-in" style={{ backgroundColor: this.props.stock.color }} ref="stockFlyIn">
           <div className="stock-left">
             <div className="stock-symbol">{this.props.stock.name}</div>
-            <div className="stock-fullName">{this.props.stock.description}</div>
+            <div className="stock-full-name">{this.props.stock.description}</div>
           </div>
           <div className="stock-right">
             {this._renderButtons()}
@@ -75,7 +75,7 @@ class Stock extends React.Component {
         <div className="stock-container" ref="stockContainer">
           <div className="stock-left">
             <div className="stock-symbol">{this.props.stock.name}</div>
-            <div className="stock-fullName">{this.props.stock.description}</div>
+            <div className="stock-full-name">{this.props.stock.description}</div>
           </div>
           <div className="stock-right">
             <div className="stock-price" style={{ color: netColor }}>{'$ ' + helper.round(this.props.stock.lastPrice, 2).toFixed(2)}</div>

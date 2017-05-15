@@ -1,3 +1,6 @@
+$icon-size: 30px 30px;
+$stock-height: 70px;
+
 .StockList {
   height: 100%;
   overflow: hidden;
@@ -25,7 +28,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 60px;
+    height: $stock-height;
     margin: 4px 0 4px 0;
     position: relative;
 
@@ -40,7 +43,7 @@
       justify-content: space-between;
       width: 100%;
       position: absolute;
-      height: 60px;
+      height: $stock-height;
       background-color: blue;
       transition: transform .2s cubic-bezier(0.02, 0.51, 0.58, 1);
 
@@ -72,7 +75,7 @@
         margin-bottom: 6px;
       }
 
-      .stock-fullName {
+      .stock-full-name {
         font-size: 0.8em;
       }
     }
@@ -97,20 +100,40 @@
         flex-direction: row;
 
         .stock-button {
-          border: 2px solid $faded-purple;
-          width: 22px;
-          height: 22px;
-          border-radius: 50%;
-          margin-left: 12px;
-
-          &:hover {
-            border: 2px solid $faded-purple;
-            background-color: $faded-purple;
-          }
+          display: block;
+          width: 30px;
+          height: 30px;
+          margin-left: 16px;
         }
 
         .stock-remove-button {
-          @extend .stock-button;
+          background: url("../images/delete_stock_icon.svg");
+          background-size: $icon-size;
+
+          &:hover {
+            background: url("../images/delete_stock_icon_hover.svg");
+            background-size: $icon-size;
+          }
+        }
+
+        .stock-view-show-button {
+          background: url("../images/view_show_icon_3.svg");
+          background-size: $icon-size;
+
+          &:hover {
+            background: url("../images/view_show_icon_hover_3.svg");
+            background-size: $icon-size;
+          }
+        }
+
+        .stock-view-hidden-button {
+          background: url("../images/view_hidden_icon.svg");
+          background-size: $icon-size;
+
+          &:hover {
+            background: url("../images/view_hidden_icon_hover.svg");
+            background-size: $icon-size;
+          }
         }
 
         .stock-view-button {
