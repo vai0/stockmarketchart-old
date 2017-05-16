@@ -13,9 +13,9 @@ class Suggestion extends React.Component {
 
   _renderButton() {
     if (this.props.stockExists) {
-      return <button onClick={this._handleClick} className="suggestion-button">&#10004;</button>;
+      return <span onClick={this._handleClick} className="stock-added-button"></span>;
     } else {
-      return <button onClick={this._handleClick} className="suggestion-button">+</button>;
+      return <span onClick={this._handleClick} className="add-stock-button"></span>;
     }
   }
 
