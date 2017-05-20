@@ -1,7 +1,9 @@
+@import '_colors';
 @import '_reset';
 @import '_app';
 @import '_searchbar';
 
 body {
+  background-color: $deep-purple;
   overflow-x: hidden;
 }

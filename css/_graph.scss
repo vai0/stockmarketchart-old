@@ -1,3 +1,9 @@
+@import '_highcharts';
+
 #Graph {
-  margin-top: 80px;
+  height: 100%;
+}
+
+.tooltip {
+  border-left: 10px;
 }

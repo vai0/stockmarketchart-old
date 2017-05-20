@@ -1,4 +1,3 @@
-@import '_colors';
 @import '_stocklist';
 @import '_graph';
 @import '../node_modules/spinkit/scss/spinners/11-folding-cube';
@@ -36,16 +35,18 @@
 .App {
   display: flex;
   flex-direction: row;
-  height: 97vh;
+  height: 100vh;
   align-items: center;
   font-family: 'Avenir-Next-Regular', Verdana, Geneva, sans-serif;
 
   .LoadingIcon {
     @extend .sk-folding-cube;
+    width: 60px;
+    height: 60px;
   }
 
   .container-left {
-    width: 25%;
+    width: 20%;
     min-width: 280px;
     height: 100%;
     background-color: $faded-purple;
@@ -55,7 +56,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 75%;
+    width: 80%;
     height: 100%;
     background-color: $deep-purple;
   }

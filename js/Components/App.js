@@ -76,7 +76,7 @@ class App extends React.Component {
     var series;
 
     if (this.state.stocks[0].name === '') {
-      symbols = ['MSFT'];
+      symbols = ['MSFT', 'FB', 'NVDA'];
     } else {
       symbols = [ newStock ];
     }
