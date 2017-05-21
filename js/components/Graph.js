@@ -45,6 +45,23 @@ class Graph extends React.Component {
         // shared: true
         // split: true
       },
+      xAxis: {
+        labels: {
+          style: {
+            "color": "#9AA5BC",
+            "fontFamily": "'Avenir-Next-Regular', Verdana, Geneva, sans-serif;"
+          }
+        }
+      },
+      yAxis: {
+        labels: {
+          format: '$ {value}',
+          style: {
+            "color": "#9AA5BC",
+            "fontFamily": "'Avenir-Next-Regular', Verdana, Geneva, sans-serif;"
+          }
+        }
+      },
       series: series
     });
   }

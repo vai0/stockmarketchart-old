@@ -8,7 +8,7 @@ class Suggestion extends React.Component {
   }
 
   _handleClick() {
-    this.props._addStock(this.props.suggestion.Symbol);
+    this.props._addStock(this.props.suggestion.symbol);
   }
 
   _renderButton() {

@@ -38,12 +38,12 @@ class Stock extends React.Component {
     var stockFlyIn = this.refs.stockFlyIn;
 
     // hide stock-fly-in div
-    var stockFlyInOffset = stockContainer.offsetWidth;
+    var stockFlyInOffset = 120;
     stockFlyIn.style.transform = 'translate3d(-' + stockFlyInOffset + 'px, 0, 0)';
     stockFlyIn.style.display = 'flex';
 
     window.addEventListener('resize', function(e) {
-      stockFlyInOffset = stockContainer.offsetWidth;
+      stockFlyInOffset = stockFlyIn.offsetWidth;
       stockFlyIn.style.transform = 'translate3d(-' + stockFlyInOffset + 'px, 0, 0)';
     })
 
@@ -64,13 +64,7 @@ class Stock extends React.Component {
       <div className="Stock" ref="stock">
         {this._renderColorTab()}
         <div className="stock-fly-in" style={{ backgroundColor: this.props.stock.color }} ref="stockFlyIn">
-          <div className="stock-left">
-            <div className="stock-symbol">{this.props.stock.name}</div>
-            <div className="stock-full-name">{this.props.stock.description}</div>
-          </div>
-          <div className="stock-right">
-            {this._renderButtons()}
-          </div>
+          {this._renderButtons()}
         </div>
         <div className="stock-container" ref="stockContainer">
           <div className="stock-left">

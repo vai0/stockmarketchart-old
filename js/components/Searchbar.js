@@ -55,12 +55,14 @@ class Searchbar extends React.Component {
           types: 'stock'
         }
       }).then((response, i) => {
-        // console.log(response);
-        var suggestions = (Array.isArray(response.data.securities.security)) ?
-          response.data.securities.security.slice(0, 7) :
-          [response.data.securities.security];
-
-        // console.log('suggestions: ', suggestions);
+        var suggestions;
+        if (response.data.securities) {
+          if (Array.isArray(response.data.securities.security)) {
+            suggestions = response.data.securities.security.slice(0, 7);
+          } else {
+            suggestions = [response.data.securities.security]
+          }
+        }
         this.setState({
           suggestions: suggestions
         });
@@ -77,7 +79,7 @@ class Searchbar extends React.Component {
   // based on the clicked suggestion. Teach Autosuggest how to calculate the
   // input value for every given suggestion.
   _getSuggestionValue(suggestion) {
-    return suggestion.Symbol.trim().toUpperCase();
+    return suggestion.symbol.trim().toUpperCase();
   }
 
   _onSuggestionSelected() {
