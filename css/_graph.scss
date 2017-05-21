@@ -1,6 +1,8 @@
 @import '_highcharts';
 
 #Graph {
+  position: absolute;
+  width: 100%;
   height: 100%;
 }
 

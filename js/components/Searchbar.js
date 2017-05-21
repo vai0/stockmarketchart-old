@@ -43,7 +43,7 @@ class Searchbar extends React.Component {
     const tradierACCESSTOKEN = 'xa1Vmgd789il8HHsTGuhZ1f0kzgJ';
     const PROXY = '';
 
-    jsonp('http://dev.markitondemand.com/Api/v2/Lookup/jsonp?input=' + value, { callback: 'jsoncallback' }, function(err, data) {
+    jsonp('//dev.markitondemand.com/Api/v2/Lookup/jsonp?input=' + value, { callback: 'jsoncallback' }, function(err, data) {
       if (err) {
         console.error('search error response: ', err.message);
       } else {
@@ -103,6 +103,17 @@ class Searchbar extends React.Component {
     });
   };
 
+  componentDidMount() {
+    var input = document.querySelector('.react-autosuggest__input');
+    var inputContainer = document.querySelector('.inputContainer');
+
+    input.style.width = inputContainer.offsetWidth - 56 + 'px';
+
+    window.addEventListener('resize', () => {
+      input.style.width = inputContainer.offsetWidth - 56 + 'px';
+    });
+  }
+
   render() {
     const { value, suggestions } = this.state;
 
@@ -124,7 +135,7 @@ class Searchbar extends React.Component {
         renderSuggestion={this._renderSuggestion}
         renderInputComponent={this._renderInputComponent}
         inputProps={inputProps}
-      />
+        />
     );
   }
 }

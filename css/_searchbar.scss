@@ -1,16 +1,27 @@
 $add-stock-icon-size: 30px 30px;
 
 .react-autosuggest__container {
-  position: relative;
+  width: 40%;
+  min-width: 300px;
   margin-top: 10vh;
   margin-left: 10vh;
   z-index: 1;
   overflow: visible;
+  box-shadow: 0 6px 10px 0 rgba(28, 28, 49, 0.14),
+  0 1px 18px 0 rgba(28, 28, 49, 0.12),
+  0 3px 5px -1px rgba(28, 28, 49, 0.4);
+  transition: all ease-out 0.1s;
+  height: auto;
+
+  &:hover {
+    box-shadow: 0 24px 38px 3px rgba(28, 28, 49, 0.14),
+    0 9px 46px 8px rgba(28, 28, 49, 0.12),
+    0 11px 15px -7px rgba(28, 28, 49, 0.4);
+  }
 }
 
 .react-autosuggest__input {
-  width: 40%;
-  min-width: 300px;
+  width: 100%;
   height: 60px;
   background-color: rgba(47, 47, 64, 1);
   border: none;
@@ -18,30 +29,23 @@ $add-stock-icon-size: 30px 30px;
   font-family: 'Avenir-Next-Regular', Verdana, Geneva, sans-serif;
   font-size: 1em;
   color: $text-color;
-  box-shadow: 0 3px 10px #1C1C31;
-  transition: all ease-in 0.1s;
-
-  &:hover {
-    box-shadow: 0 15px 20px 0px #1C1C31;
-  }
 }
 
 .inputContainer {
   overflow: visible;
+  position: relative;
 }
 
 .react-autosuggest__suggestions-container {
-  position: absolute;
-  width: 40%;
+  // position: absolute;
+  width: 100%;
   min-width: 300px;
-  padding-left: 56px;
   z-index: 1;
   background-color: rgba(47, 47, 64, 1);
 }
 
 .react-autosuggest__suggestions-container--open {
-  padding-bottom: 10px;
-  box-shadow: 0 15px 20px 0px #1C1C31;
+  padding-bottom: 25px;
 }
 
 .react-autosuggest__suggestion {
@@ -55,6 +59,7 @@ $add-stock-icon-size: 30px 30px;
     height: 70px;
 
     .suggestion-left {
+      padding-left: 56px;
 
       .suggestion-symbol {
         font-family: 'Avenir-Next-Demibold', Verdana, Geneva, sans-serif;

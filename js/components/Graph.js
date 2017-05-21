@@ -13,12 +13,13 @@ class Graph extends React.Component {
     var series = this.props.stocks.filter(stock => stock.visibility === 'on');
     Highcharts.stockChart('Graph', {
       rangeSelector: {
-        selected: 4,
-        inputEnabled: false,
-        buttonPosition: {
-          x: containerRightWidth - 270,
-          y: 0
-        }
+        selected: 3,
+        enabled: false
+        // inputEnabled: false,
+        // buttonPosition: {
+        //   x: containerRightWidth - 270,
+        //   y: 0
+        // }
       },
       yAxis: {
         labels: {

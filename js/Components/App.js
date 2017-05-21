@@ -36,9 +36,9 @@ class App extends React.Component {
   }
 
   _setStockColors(series) {
-    const colors = ['#FF1744', '#D500F9', '#00E676', '#00E5FF', '#FFEA00',
-      '#FF3D00', '#F50057', '#651FFF', '#1DE9B6', '#C6FF00',
-      '#3D5AFE', '#00B0FF', '#76FF03', '#FFC400'];
+    const colors = ['#FF1744', '#D500F9', '#00E676', '#00E5FF', '#FFEA00', '#3D5AFE',
+      '#F50057', '#651FFF', '#1DE9B6', '#C6FF00',
+      '#FF3D00', '#00B0FF', '#76FF03', '#FFC400'];
 
     return series.map(function(stock, i) {
       var color = colors[i] ? colors[i] : colors[i % (colors.length - 1)];
@@ -76,7 +76,7 @@ class App extends React.Component {
     var series;
 
     if (this.state.stocks[0].name === '') {
-      symbols = ['MSFT', 'FB', 'NVDA'];
+      symbols = ['MSFT', 'FB', 'NVDA', 'GE', 'AAPL', 'DIS'];
     } else {
       symbols = [ newStock ];
     }
