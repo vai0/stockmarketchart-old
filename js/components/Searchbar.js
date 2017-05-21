@@ -39,20 +39,32 @@ class Searchbar extends React.Component {
 
   _loadSuggestions(value) {
     const self = this;
-    const inputValue = value.trim().toLowerCase();
+    const inputValue = this.state.value.trim().toLowerCase();
     const tradierACCESSTOKEN = 'xa1Vmgd789il8HHsTGuhZ1f0kzgJ';
     const PROXY = '';
+    const endpoint = 'https://sandbox.tradier.com/v1';
 
-    jsonp('//dev.markitondemand.com/Api/v2/Lookup/jsonp?input=' + value, { callback: 'jsoncallback' }, function(err, data) {
-      if (err) {
-        console.error('search error response: ', err.message);
-      } else {
-        console.log('data: ', data);
-        self.setState({
-          suggestions: data.slice(0, 7)
+    axios.get(endpoint + '/markets/lookup', {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + tradierACCESSTOKEN
+        },
+        params: {
+          q: inputValue,
+          exchanges: 'Q,N',
+          types: 'stock'
+        }
+      }).then((response, i) => {
+        // console.log(response);
+        var suggestions = (Array.isArray(response.data.securities.security)) ?
+          response.data.securities.security.slice(0, 7) :
+          [response.data.securities.security];
+
+        // console.log('suggestions: ', suggestions);
+        this.setState({
+          suggestions: suggestions
         });
-      }
-    });
+      });
   }
 
   // Autosuggest will call this function every time you need to update suggestions.
@@ -76,10 +88,10 @@ class Searchbar extends React.Component {
 
   // Use your imagination to render suggestions.
   _renderSuggestion(suggestion) {
-    var symbols = this.props.stocks.map(stock => stock.name);
+    var symbols = this.props.stocks.map(stock => stock.name.trim().toUpperCase());
     var stockExists = false;
     for (let i = 0; i < symbols.length; i++) {
-      if (symbols[i] === suggestion.Symbol) {
+      if (symbols[i] === suggestion.symbol.trim().toUpperCase()) {
         stockExists = true;
         break;
       }

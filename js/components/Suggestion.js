@@ -23,8 +23,8 @@ class Suggestion extends React.Component {
     return (
       <div className="suggestion">
         <div className="suggestion-left">
-          <div className="suggestion-symbol">{this.props.suggestion.Symbol}</div>
-          <div className="suggestion-full-name">{this.props.suggestion.Name}</div>
+          <div className="suggestion-symbol">{this.props.suggestion.symbol}</div>
+          <div className="suggestion-full-name">{this.props.suggestion.description}</div>
         </div>
         <div className="suggestion-right">
           {this._renderButton()}

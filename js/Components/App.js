@@ -70,6 +70,7 @@ class App extends React.Component {
 
   _fetchStocks(newStock) {
     const tradierACCESSTOKEN = 'xa1Vmgd789il8HHsTGuhZ1f0kzgJ';
+    const endpoint = 'https://sandbox.tradier.com/v1';
     const self = this;
     var promises = [];
     var symbols;
@@ -92,7 +93,7 @@ class App extends React.Component {
 
     //historical pricing
     symbols.forEach(function(symbol) {
-      promises.push(axios.get('https://sandbox.tradier.com/v1/markets/history', {
+      promises.push(axios.get(endpoint + '/markets/history', {
         headers: {
           Accept: 'application/json',
           Authorization: 'Bearer ' + tradierACCESSTOKEN
@@ -119,7 +120,7 @@ class App extends React.Component {
     axios.all(promises)
       .then(function(responses) {
         responses.forEach(function(response, i) {
-          console.log('response.data: ', response.data);
+          // console.log('response.data: ', response.data);
           var data = response.data;
           if (data.history) {
             series[i].data = data.history.day.map(day => [Date.parse(day.date), day.close]);
@@ -157,7 +158,7 @@ class App extends React.Component {
           dataLoaded: true,
           stocks: newSeries
         });
-        console.log('series: ', series);
+        // console.log('series: ', series);
       })
       .catch(error => console.log(error));
   }
