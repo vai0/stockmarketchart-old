@@ -1,4 +1,4 @@
-  import React from 'react';
+import React from 'react';
 import * as helper from 'helpers'
 
 class Stock extends React.Component {

@@ -18,6 +18,7 @@ class App extends React.Component {
 
     this.state = {
       dataLoaded: false,
+      // stocks: null
       stocks: [
         {
           name: '',
@@ -77,7 +78,8 @@ class App extends React.Component {
     var series;
 
     if (this.state.stocks[0].name === '') {
-      symbols = ['MSFT', 'FB', 'NVDA', 'GE', 'AAPL', 'DIS'];
+      symbols = ['MSFT', 'FB'];
+      // symbols = ['MSFT', 'FB', 'NVDA', 'AAPL'];
     } else {
       symbols = [ newStock ];
     }

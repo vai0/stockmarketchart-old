@@ -33,17 +33,16 @@ class Graph extends React.Component {
         }]
       },
       tooltip: {
-        useHTML: true,
-        formatter: function() {
-          var date = moment(this.x).format('MMMM Do, YYYY');
-          // console.log(date);
-          // console.log('this.y: ', this.y);
-          // return '<div class="tooltip"><div class="header">' + date + '</div><div class="main">' + this.y + '</div></div>';
-          // console.log(this.points[0].series.name);
-          return '<div class="tooltip" style="border-color:' + this.points[0].series.color + '"><div class="date">' + date + '</div><div class="symbol">' + this.points[0].series.name + ' ' + this.y + '</div></div>';
+        style: {
+          "color": "#9AA5BC",
+          "cursor": "default",
+          "fontSize": "12px",
+          "pointerEvents": "none",
+          "whiteSpace": "nowrap"
         },
-        // pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>',
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>:  <b>{point.y}</b><br/>',
         valueDecimals: 2,
+        // shared: true
         // split: true
       },
       series: series
