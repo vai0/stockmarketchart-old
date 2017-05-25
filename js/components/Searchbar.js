@@ -5,6 +5,7 @@ import jsonp from 'jsonp';
 import debounce from 'debounce';
 import Suggestion from 'components/Suggestion';
 import searchIcon from 'images/search_icon.svg';
+import tradierAccessToken from 'tradierAccessToken';
 
 class Searchbar extends React.Component {
   constructor(props) {
@@ -40,14 +41,13 @@ class Searchbar extends React.Component {
   _loadSuggestions(value) {
     const self = this;
     const inputValue = this.state.value.trim().toLowerCase();
-    const tradierACCESSTOKEN = 'xa1Vmgd789il8HHsTGuhZ1f0kzgJ';
     const PROXY = '';
-    const endpoint = 'https://sandbox.tradier.com/v1';
+    const endpoint = 'https://api.tradier.com/v1/';
 
-    axios.get(endpoint + '/markets/lookup', {
+    axios.get(endpoint + 'markets/lookup', {
         headers: {
           Accept: 'application/json',
-          Authorization: 'Bearer ' + tradierACCESSTOKEN
+          Authorization: 'Bearer ' + tradierAccessToken
         },
         params: {
           q: inputValue,

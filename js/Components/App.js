@@ -5,6 +5,7 @@ import LoadingIcon from 'components/LoadingIcon';
 import StockList from 'components/StockList';
 import Graph from 'components/Graph';
 import Searchbar from 'components/Searchbar';
+import tradierAccessToken from 'tradierAccessToken';
 
 class App extends React.Component {
   constructor(props) {
@@ -38,8 +39,7 @@ class App extends React.Component {
 
   _setStockColors(series) {
     const colors = ['#FF1744', '#D500F9', '#00E676', '#00E5FF', '#FFEA00', '#3D5AFE',
-      '#F50057', '#651FFF', '#1DE9B6', '#C6FF00',
-      '#FF3D00', '#00B0FF', '#76FF03', '#FFC400'];
+      '#F50057', '#651FFF', '#1DE9B6', '#C6FF00', '#FF3D00', '#00B0FF', '#76FF03', '#FFC400'];
 
     return series.map(function(stock, i) {
       var color = colors[i] ? colors[i] : colors[i % (colors.length - 1)];
@@ -70,8 +70,7 @@ class App extends React.Component {
   }
 
   _fetchStocks(newStock) {
-    const tradierACCESSTOKEN = 'xa1Vmgd789il8HHsTGuhZ1f0kzgJ';
-    const endpoint = 'https://sandbox.tradier.com/v1';
+    const endpoint = 'https://api.tradier.com/v1/';
     const self = this;
     var promises = [];
     var symbols;
@@ -95,10 +94,10 @@ class App extends React.Component {
 
     //historical pricing
     symbols.forEach(function(symbol) {
-      promises.push(axios.get(endpoint + '/markets/history', {
+      promises.push(axios.get(endpoint + 'markets/history', {
         headers: {
           Accept: 'application/json',
-          Authorization: 'Bearer ' + tradierACCESSTOKEN
+          Authorization: 'Bearer ' + tradierAccessToken
         },
         params: {
           symbol: symbol,
@@ -109,10 +108,10 @@ class App extends React.Component {
     });
 
     //quotes
-    promises.push(axios.get('https://sandbox.tradier.com/v1/markets/quotes', {
+    promises.push(axios.get(endpoint + 'markets/quotes', {
       headers: {
         Accept: 'application/json',
-        Authorization: 'Bearer ' + tradierACCESSTOKEN
+        Authorization: 'Bearer ' + tradierAccessToken
       },
       params: {
         symbols: symbols.join(',')
