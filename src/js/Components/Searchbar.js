@@ -1,7 +1,6 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import axios from 'axios';
-import jsonp from 'jsonp';
 import debounce from 'debounce';
 import Suggestion from 'components/Suggestion';
 import searchIcon from 'images/search_icon.svg';

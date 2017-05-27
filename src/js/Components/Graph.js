@@ -1,7 +1,7 @@
 import React from 'react';
 import Highcharts from 'highcharts/highstock';
-import 'css/_graph.scss';
 import moment from 'moment';
+import 'css/_graph.scss';
 
 class Graph extends React.Component {
   constructor(props) {

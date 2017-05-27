@@ -1,6 +1,6 @@
 @import '_stocklist';
 @import '_graph';
-@import '../node_modules/spinkit/scss/spinners/11-folding-cube';
+@import '_spinkit_folding_cube.scss';
 
 @font-face {
   font-family: 'Avenir-Next-Regular';
@@ -41,8 +41,8 @@
 
   .LoadingIcon {
     @extend .sk-folding-cube;
-    width: 60px;
-    height: 60px;
+    width: 30px;
+    height: 30px;
   }
 
   .container-left {
