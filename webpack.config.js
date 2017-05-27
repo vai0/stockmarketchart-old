@@ -12,7 +12,7 @@ module.exports = {
     vendor: VENDOR_LIBS
   },
   output: {
-    path: path.join(__dirname, 'build'), // This is where images AND js will go
+    path: path.join(__dirname, 'dist'), // This is where images AND js will go
     filename: '[name].js'
   },
   module: {
