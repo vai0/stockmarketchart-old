@@ -4,8 +4,10 @@
   "description": "",
   "main": "script.js",
   "scripts": {
+    "clean": "rm -rf ./dist/*",
     "dev": "webpack-dev-server --progress",
-    "build": "webpack -p --progress"
+    "build": "npm run clean && webpack -p --progress",
+    "upload": "scp -r ./dist/* justin@justinchi.me:/var/www/html/stockmarketchart"
   },
   "author": "Justin Chi",
   "license": "ISC",
@@ -29,7 +31,6 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
-    "babel-cli": "^6.24.1",
     "debounce": "^1.0.2",
     "highcharts": "^5.0.10",
     "moment": "^2.18.1",

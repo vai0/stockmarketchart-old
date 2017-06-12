@@ -37,12 +37,13 @@
   flex-direction: row;
   height: 100vh;
   align-items: center;
+  justify-content: center;
   font-family: 'Avenir-Next-Regular', Verdana, Geneva, sans-serif;
 
   .LoadingIcon {
     @extend .sk-folding-cube;
-    width: 30px;
-    height: 30px;
+    width: 70px;
+    height: 70px;
   }
 
   .container-left {

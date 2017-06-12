@@ -3,7 +3,7 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var VENDOR_LIBS = [
-  'axios', 'babel-cli', 'debounce', 'highcharts', 'moment', 'react', 'react-dom', 'react-autosuggest'
+  'axios', 'debounce', 'highcharts', 'moment', 'react', 'react-dom', 'react-autosuggest'
 ];
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist'), // This is where images AND js will go
-    filename: '[name].js'
+    filename: '[name].[chunkhash].js'
   },
   module: {
     rules: [
@@ -69,7 +69,7 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
+      names: ['vendor', 'manifest']
     }),
     new HtmlWebpackPlugin({
       template: './src/index.html'
