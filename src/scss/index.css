@@ -935,6 +935,10 @@ input.highcharts-range-selector {
       font-size: 1.1em;
       margin-bottom: 6px; }
     .react-autosuggest__suggestion .suggestion .suggestion-left .suggestion-full-name {
+      white-space: nowrap;
+      overflow-x: hidden;
+      width: 200px;
+      text-overflow: ellipsis;
       font-size: 0.8em; }
   .react-autosuggest__suggestion .suggestion .suggestion-right {
     margin-right: 10%; }

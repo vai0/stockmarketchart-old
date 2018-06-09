@@ -43,8 +43,9 @@ class App extends React.Component {
     }
 
     _toggleVisibility = symbol => {
+        const { stocks } = this.state;
         this.setState({
-            stocks: this.state.stocks.map(s => {
+            stocks: stocks.map(s => {
                 if (s.symbol === symbol) s.display = !s.display;
                 return s;
             })
@@ -76,8 +77,7 @@ class App extends React.Component {
             const s = resp.data;
             return {
                 symbol: s.symbol,
-                name: s.companyName,
-                description: s.description
+                name: s.companyName
             };
         });
     };
@@ -98,102 +98,86 @@ class App extends React.Component {
                 display: true
             };
 
+            this.setState({
+                loaded: false
+            });
+
             return Promise.all([meta, quote, chart, stock]);
+        } else {
+            return null;
         }
     };
 
-    _joinStockData = (meta, quote, chart, stock) => {
-        return;
-    };
+    _joinStockData = ({ meta, quote, chart, stock }) => ({
+        symbol: stock.symbol,
+        color: stock.color,
+        display: stock.display,
+        name: meta.name,
+        price: quote.price,
+        change: quote.change,
+        changePercent: quote.changePercent,
+        data: chart
+    });
 
     _addStock = symbol => {
-        const { stocks } = this.state;
-
-        this._fetchStock(symbol).then(([meta, quote, chart, stock]) => {
-            this.setState({
-                stocks: [
-                    ...stocks,
-                    {
-                        symbol: stock.symbol,
-                        color: stock.color,
-                        display: stock.display,
-                        name: meta.companyName,
-                        description: meta.description,
-                        price: quote.latestPrice,
-                        change: quote.change,
-                        changePercent: quote.changePercent,
-                        chart
-                    }
-                ]
+        if (this._fetchStock(symbol)) {
+            this._fetchStock(symbol).then(([meta, quote, chart, stock]) => {
+                console.log("stock", stock);
+                this.setState({
+                    loaded: true,
+                    stocks: [
+                        ...this.state.stocks,
+                        this._joinStockData({ meta, quote, chart, stock })
+                    ]
+                });
             });
-        });
+        }
     };
 
     _removeStock = symbol => {
-        const { metas, quotes, charts, stocks } = this.state;
-
+        const { stocks } = this.state;
         this.setState({
-            stocks: stocks.filter(s => s.symbol !== symbol),
-            charts: charts.filter(s => s.symbol !== symbol)
+            stocks: stocks.filter(s => s.symbol !== symbol)
         });
     };
 
     componentDidMount() {
-        ["FB", "MSFT", "NVDA", "AAPL"].forEach(s => this._addStock(s));
+        const init = ["FB", "MSFT", "NVDA", "AAPL"];
 
-        // Promise.all(init.map(s => this._fetchStock(s))).then(resp => {
-        //     const metas = resp.map(stock => stock[0]);
-        //     const quotes = resp.map(stock => stock[1]);
-        //     const charts = resp.map(stock => stock[2]);
-        //     const stocks = resp.map(stock => stock[3]);
+        Promise.all(init.map(s => this._fetchStock(s))).then(resp => {
+            const stocks = resp.map(([meta, quote, chart, stock]) =>
+                this._joinStockData({ meta, quote, chart, stock })
+            );
 
-        //     Promise.all([
-        //         Promise.all(metas),
-        //         Promise.all(quotes),
-        //         Promise.all(charts)
-        //     ]).then(([metas, quotes, charts]) => {
-        //         this.setState({
-        //             loaded: true,
-        //             metas,
-        //             quotes,
-        //             charts,
-        //             stocks
-        //         });
-        //     });
-        // });
+            this.setState({
+                loaded: true,
+                stocks
+            });
+        });
     }
 
     render() {
-        let components = null;
-        if (this.state.loaded) {
-            components = (
+        const { loaded, stocks } = this.state;
+
+        if (loaded) {
+            return (
                 <div className="App">
                     <div className="container-left">
                         <StockList
-                            quotes={this.state.quotes}
-                            metas={this.state.metas}
-                            stocks={this.state.stocks}
+                            stocks={stocks}
                             _removeStock={this._removeStock}
                             _toggleVisibility={this._toggleVisibility}
                         />
                     </div>
                     <div className="container-right">
-                        <Searchbar
-                            stocks={this.state.stocks}
-                            _addStock={this._addStock}
-                        />
-                        <Graph stocks={this.state.charts} />
+                        <Searchbar stocks={stocks} _addStock={this._addStock} />
+                        <Graph stocks={stocks} />
                     </div>
                 </div>
             );
         } else {
-            components = (
-                <div className="App">
-                    <LoadingIcon />
-                </div>
-            );
+            return null;
         }
-        return components;
     }
 }
 

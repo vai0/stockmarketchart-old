@@ -6,103 +6,94 @@ import Suggestion from "components/Suggestion";
 import searchIcon from "images/search_icon.svg";
 import { API_HOST } from "config";
 
-/**
- *
- * fetch stock reference data, set it to var
- * rewrite fetch suggestions - return relevant results that match
- *
- */
-
-let SYMBOLS;
-
-axios.get(`${API_HOST}/ref-data/symbols`).then(resp => {
-    SYMBOLS = resp.data;
-});
-
 class Searchbar extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this._onChange = this._onChange.bind(this);
-        this._onSuggestionsFetchRequested = this._onSuggestionsFetchRequested.bind(
-            this
-        );
-        this._getSuggestionValue = this._getSuggestionValue.bind(this);
-        this._renderSuggestion = this._renderSuggestion.bind(this);
-        this._onSuggestionsClearRequested = this._onSuggestionsClearRequested.bind(
-            this
-        );
-        this.debouncedLoadSuggestions = debounce(this._loadSuggestions, 300);
-        this._onSuggestionSelected = this._onSuggestionSelected.bind(this);
-        this._renderInputComponent = this._renderInputComponent.bind(this);
-
+    constructor() {
+        super();
         this.state = {
             value: "",
-            suggestions: []
+            suggestions: [],
+            symbols: []
         };
     }
 
-    _onChange(event, { newValue }) {
+    _fetchSuggestions = () => {
+        axios.get(`${API_HOST}/ref-data/symbols`).then(resp => {
+            this.setState({
+                symbols: resp.data
+            });
+        });
+    };
+
+    _onChange = (event, { newValue }) => {
         this.setState({
             value: newValue
         });
-    }
+    };
 
-    _onSuggestionsFetchRequested({ value }) {
+    _onSuggestionsFetchRequested = ({ value }) => {
         const inputVal = value.trim().toLowerCase();
         const inputLength = inputVal.length;
-        return inputLength === 0
-            ? []
-            : SYMBOLS.filter(
-                  s => s.symbol.toLowerCase().slice(0, inputLength) === inputVal
-              );
-    }
+        const { symbols } = this.state;
 
-    _getSuggestionValue(suggestion) {
+        const suggestions =
+            inputLength === 0
+                ? []
+                : symbols
+                      .filter(
+                          s =>
+                              s.symbol.toLowerCase().slice(0, inputLength) ===
+                              inputVal
+                      )
+                      .slice(0, 5);
+
+        this.setState({
+            suggestions
+        });
+    };
+
+    _getSuggestionValue = suggestion => {
         return suggestion.symbol.trim().toUpperCase();
-    }
+    };
 
-    _onSuggestionSelected() {
+    _onSuggestionSelected = () => {
         this.setState({
             value: ""
         });
-    }
+    };
 
-    // Use your imagination to render suggestions.
-    _renderSuggestion(suggestion) {
-        var symbols = this.props.stocks.map(stock =>
-            stock.name.trim().toUpperCase()
+    _renderSuggestion = suggestion => {
+        const { stocks, _addStock } = this.props;
+        const addedStocks = stocks.map(s => s.symbol);
+        const stockExists = addedStocks.some(
+            s => s === suggestion.symbol.trim().toUpperCase()
         );
-        var stockExists = false;
-        for (let i = 0; i < symbols.length; i++) {
-            if (symbols[i] === suggestion.symbol.trim().toUpperCase()) {
-                stockExists = true;
-                break;
-            }
-        }
+
         return (
             <Suggestion
                 stockExists={stockExists}
                 suggestion={suggestion}
-                _addStock={this.props._addStock}
+                _addStock={_addStock}
             />
         );
-    }
+    };
 
-    _renderInputComponent(inputProps) {
+    _renderInputComponent = inputProps => {
         return (
             <div className="inputContainer">
                 <span className="search-icon" />
                 <input {...inputProps} />
             </div>
         );
-    }
+    };
 
-    // Autosuggest will call this function every time you need to clear suggestions.
-    _onSuggestionsClearRequested() {
+    _onSuggestionsClearRequested = () => {
         this.setState({
             suggestions: []
         });
+    };
+
+    componentWillMount() {
+        this._fetchSuggestions();
     }
 
     componentDidMount() {
@@ -119,14 +110,12 @@ class Searchbar extends React.Component {
     render() {
         const { value, suggestions } = this.state;
 
-        // Autosuggest will pass through all these props to the input element.
         const inputProps = {
-            placeholder: "Search for stock...",
+            placeholder: "Search by symbol",
             value,
             onChange: this._onChange
         };
 
-        // Finally, render it!
         return (
             <Autosuggest
                 suggestions={suggestions}
