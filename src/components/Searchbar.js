@@ -1,9 +1,7 @@
 import React from "react";
 import Autosuggest from "react-autosuggest";
 import axios from "axios";
-import debounce from "debounce";
 import Suggestion from "components/Suggestion";
-import searchIcon from "images/search_icon.svg";
 import { API_HOST } from "config";
 
 class Searchbar extends React.Component {

@@ -37,7 +37,7 @@ class App extends React.Component {
     constructor(props) {
         super();
         this.state = {
-            loaded: false,
+            initLoad: false,
             stocks: []
         };
     }
@@ -98,10 +98,6 @@ class App extends React.Component {
                 display: true
             };
 
-            this.setState({
-                loaded: false
-            });
-
             return Promise.all([meta, quote, chart, stock]);
         } else {
             return null;
@@ -122,9 +118,7 @@ class App extends React.Component {
     _addStock = symbol => {
         if (this._fetchStock(symbol)) {
             this._fetchStock(symbol).then(([meta, quote, chart, stock]) => {
-                console.log("stock", stock);
                 this.setState({
-                    loaded: true,
                     stocks: [
                         ...this.state.stocks,
                         this._joinStockData({ meta, quote, chart, stock })
@@ -150,16 +144,16 @@ class App extends React.Component {
             );
 
             this.setState({
-                loaded: true,
+                initLoad: true,
                 stocks
             });
         });
     }
 
     render() {
-        const { loaded, stocks } = this.state;
+        const { initLoad, stocks } = this.state;
 
-        if (loaded) {
+        if (initLoad) {
             return (
                 <div className="App">
                     <div className="container-left">
@@ -171,12 +165,12 @@ class App extends React.Component {
                     </div>
                     <div className="container-right">
                         <Searchbar stocks={stocks} _addStock={this._addStock} />
-                        <Graph stocks={stocks} />
+                        <Graph series={stocks.filter(s => s.display)} />
                     </div>
                 </div>
             );
         } else {
-            return null;
+            return <LoadingIcon />;
         }
     }
 }

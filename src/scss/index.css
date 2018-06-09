@@ -85,7 +85,11 @@ table {
       font-size: 1.1em;
       margin-bottom: 6px; }
     .Stock .stock-left .stock-full-name {
-      font-size: 0.8em; }
+      font-size: 0.8em;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
   .Stock .stock-right {
     display: flex;
     flex-direction: column;

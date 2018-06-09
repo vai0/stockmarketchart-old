@@ -52,6 +52,10 @@ $stock-height: 70px;
 
     .stock-full-name {
       font-size: 0.8em;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 
