@@ -1,0 +1,974 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.Stock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  margin: 4px 0 4px 0;
+  position: relative; }
+  .Stock .color-tab {
+    height: 100%;
+    width: 6px; }
+  .Stock .stock-fly-in {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    width: 120px;
+    position: absolute;
+    height: 70px;
+    background-color: blue;
+    transition: transform 0.2s cubic-bezier(0.02, 0.51, 0.58, 1); }
+  .Stock .stock-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    transition: transform 0.2s cubic-bezier(0.02, 0.51, 0.58, 1); }
+  .Stock .stock-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 150px;
+    color: #9AA5BC;
+    padding-left: calc(12% + 10px); }
+    .Stock .stock-left .stock-symbol {
+      font-family: 'Avenir-Next-Demibold', Verdana, Geneva, sans-serif;
+      font-size: 1.1em;
+      margin-bottom: 6px; }
+    .Stock .stock-left .stock-full-name {
+      font-size: 0.8em; }
+  .Stock .stock-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 10%; }
+    .Stock .stock-right .stock-price {
+      margin-bottom: 5px; }
+    .Stock .stock-right .stock-changePercent {
+      font-size: 0.8em; }
+  .Stock .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    .Stock .buttons .stock-button, .Stock .buttons .stock-view-button {
+      display: block;
+      width: 30px;
+      height: 30px; }
+    .Stock .buttons .stock-remove-button {
+      background: url("../images/delete_stock_icon.svg");
+      background-size: 30px 30px;
+      margin-left: 16px; }
+      .Stock .buttons .stock-remove-button:hover {
+        background: url("../images/delete_stock_icon_hover.svg");
+        background-size: 30px 30px; }
+    .Stock .buttons .stock-view-show-button {
+      background: url("../images/view_show_icon_3.svg");
+      background-size: 30px 30px; }
+      .Stock .buttons .stock-view-show-button:hover {
+        background: url("../images/view_show_icon_hover_3.svg");
+        background-size: 30px 30px; }
+    .Stock .buttons .stock-view-hidden-button {
+      background: url("../images/view_hidden_icon.svg");
+      background-size: 30px 30px; }
+      .Stock .buttons .stock-view-hidden-button:hover {
+        background: url("../images/view_hidden_icon_hover.svg");
+        background-size: 30px 30px; }
+
+.StockList {
+  height: 100%;
+  overflow: hidden; }
+  .StockList .title {
+    font-size: 1.1em;
+    color: #9AA5BC;
+    margin-left: 10px;
+    padding-left: 12%;
+    margin-top: 10vh;
+    margin-bottom: 7%; }
+    .StockList .title:after {
+      content: " ";
+      border-bottom: 1px solid #39455C;
+      width: 70%;
+      display: block;
+      margin-top: 40px; }
+
+/* Colors for data series and points. */
+/* Chart background, point stroke for markers and columns etc, */
+/* Neutral colors, grayscale by default. The default colors are defined by mixing the background-color
+with neutral, with a weight corresponding to the number in the name. */
+/* Strong text. */
+/* Main text and some strokes. */
+/* Axis labels, axis title, connector fallback. */
+/* Credits text, export menu stroke. */
+/* Disabled texts, button strokes, crosshair etc. */
+/* Grid lines etc. */
+/* Minor grid lines etc. */
+/* Tooltip backgroud, button fills, map null points. */
+/* Colored, shades of blue by default */
+/* Drilldown clickable labels, color axis max color. */
+/* Selection marker, menu hover, button hover, chart border, navigator series. */
+/* Navigator mask fill. */
+/* Ticks and axis line. */
+/* Pressed button, color axis min color. */
+.highcharts-label .highcharts-tooltip {
+  font-family: 'Avenir-Next-Regular', Verdana, Geneva, sans-serif;
+  padding: 10px; }
+  .highcharts-label .highcharts-tooltip span {
+    font-family: 'Avenir-Next-Regular', Verdana, Geneva, sans-serif;
+    color: #9AA5BC; }
+  .highcharts-label .highcharts-tooltip .tooltip {
+    border-left: 10px solid; }
+  .highcharts-label .highcharts-tooltip .symbol {
+    font-family: 'Avenir-Next-Demibold', Verdana, Geneva, sans-serif;
+    font-size: 1.15em;
+    margin-top: 10px; }
+
+.highcharts-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  line-height: normal;
+  z-index: 0;
+  /* #1072 */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+  font-size: 12px; }
+
+.highcharts-root text {
+  stroke-width: 0; }
+
+.highcharts-background {
+  fill: #242434; }
+
+.highcharts-plot-border, .highcharts-plot-background {
+  fill: none; }
+
+.highcharts-label-box {
+  fill: none; }
+
+.highcharts-button-box {
+  fill: inherit; }
+
+/* Titles */
+.highcharts-title {
+  fill: #9AA5BC;
+  font-size: 1.5em; }
+
+.highcharts-subtitle {
+  fill: #9AA5BC; }
+
+/* Axes */
+.highcharts-axis-line {
+  fill: none;
+  stroke: #9AA5BC; }
+
+.highcharts-yaxis .highcharts-axis-line {
+  stroke-width: 0; }
+
+.highcharts-axis-title {
+  fill: #9AA5BC; }
+
+.highcharts-axis-labels {
+  fill: #9AA5BC;
+  cursor: default;
+  font-size: 0.9em; }
+
+.highcharts-grid-line {
+  fill: none;
+  stroke: #2d2d42; }
+
+.highcharts-xaxis-grid .highcharts-grid-line {
+  stroke-width: 0; }
+
+.highcharts-tick {
+  stroke: #9AA5BC; }
+
+.highcharts-yaxis .highcharts-tick {
+  stroke-width: 0; }
+
+.highcharts-minor-grid-line {
+  stroke: #2d2d42; }
+
+.highcharts-crosshair-thin {
+  stroke-width: 1px;
+  stroke: #646b7a; }
+
+.highcharts-crosshair-category {
+  stroke: #9AA5BC;
+  stroke-opacity: 0.25; }
+
+/* Credits */
+.highcharts-credits {
+  display: none;
+  cursor: pointer;
+  fill: #9AA5BC;
+  font-size: 0.7em;
+  transition: fill 250ms, font-size 250ms; }
+
+.highcharts-credits:hover {
+  fill: black;
+  font-size: 1em; }
+
+/* Tooltip */
+.highcharts-tooltip {
+  cursor: default;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: stroke 150ms; }
+
+.highcharts-tooltip text {
+  fill: #9AA5BC; }
+
+.highcharts-tooltip .highcharts-header {
+  font-size: 0.85em; }
+
+.highcharts-tooltip-box {
+  stroke-width: 1px;
+  fill: #2F2F40;
+  fill-opacity: 0.85; }
+
+.highcharts-selection-marker {
+  fill: #9AA5BC;
+  fill-opacity: 0.25; }
+
+.highcharts-graph {
+  fill: none;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round; }
+
+.highcharts-state-hover .highcharts-graph {
+  stroke-width: 3; }
+
+.highcharts-state-hover path {
+  transition: stroke-width 50;
+  /* quick in */ }
+
+.highcharts-state-normal path {
+  transition: stroke-width 250ms;
+  /* slow out */ }
+
+/* Legend hover affects points and series */
+g.highcharts-series, .highcharts-point {
+  transition: opacity 250ms; }
+
+.highcharts-legend-series-active g.highcharts-series:not(.highcharts-series-hover),
+.highcharts-legend-point-active .highcharts-point:not(.highcharts-point-hover) {
+  opacity: 0.2; }
+
+/* Series options */
+/* Default colors */
+.highcharts-color-0 {
+  fill: #7cb5ec;
+  stroke: #7cb5ec; }
+
+.highcharts-color-1 {
+  fill: #434348;
+  stroke: #434348; }
+
+.highcharts-color-2 {
+  fill: #90ed7d;
+  stroke: #90ed7d; }
+
+.highcharts-color-3 {
+  fill: #f7a35c;
+  stroke: #f7a35c; }
+
+.highcharts-color-4 {
+  fill: #8085e9;
+  stroke: #8085e9; }
+
+.highcharts-color-5 {
+  fill: #f15c80;
+  stroke: #f15c80; }
+
+.highcharts-color-6 {
+  fill: #e4d354;
+  stroke: #e4d354; }
+
+.highcharts-color-7 {
+  fill: #2b908f;
+  stroke: #2b908f; }
+
+.highcharts-color-8 {
+  fill: #f45b5b;
+  stroke: #f45b5b; }
+
+.highcharts-color-9 {
+  fill: #91e8e1;
+  stroke: #91e8e1; }
+
+.highcharts-area {
+  fill-opacity: 0.75;
+  stroke-width: 0; }
+
+.highcharts-markers {
+  stroke-width: 1px;
+  stroke: #242434; }
+
+.highcharts-point {
+  stroke-width: 1px; }
+
+.highcharts-dense-data .highcharts-point {
+  stroke-width: 0; }
+
+.highcharts-data-label {
+  font-size: 0.9em;
+  font-weight: bold; }
+
+.highcharts-data-label-box {
+  fill: none;
+  stroke-width: 0; }
+
+.highcharts-data-label text {
+  fill: #9AA5BC; }
+
+.highcharts-data-label-connector {
+  fill: none; }
+
+.highcharts-halo {
+  fill-opacity: 0.25;
+  stroke-width: 0; }
+
+.highcharts-point-select {
+  fill: #646b7a;
+  stroke: #9AA5BC; }
+
+.highcharts-column-series .highcharts-point {
+  stroke: #242434;
+  transition: fill-opacity 250ms; }
+
+.highcharts-column-series .highcharts-point-hover {
+  fill-opacity: 0.75;
+  transition: fill-opacity 50ms; }
+
+.highcharts-pie-series .highcharts-point {
+  stroke-linejoin: round;
+  stroke: #242434; }
+
+.highcharts-pie-series .highcharts-point-hover {
+  fill-opacity: 0.75;
+  transition: fill-opacity 50ms; }
+
+.highcharts-pie-series .highcharts-point-select {
+  fill: inherit;
+  stroke: inherit; }
+
+.highcharts-funnel-series .highcharts-point {
+  stroke-linejoin: round;
+  stroke: #242434; }
+
+.highcharts-funnel-series .highcharts-point-hover {
+  fill-opacity: 0.75;
+  transition: fill-opacity 50ms; }
+
+.highcharts-funnel-series .highcharts-point-select {
+  fill: inherit;
+  stroke: inherit; }
+
+.highcharts-pyramid-series .highcharts-point {
+  stroke-linejoin: round;
+  stroke: #242434; }
+
+.highcharts-pyramid-series .highcharts-point-hover {
+  fill-opacity: 0.75;
+  transition: fill-opacity 50ms; }
+
+.highcharts-pyramid-series .highcharts-point-select {
+  fill: inherit;
+  stroke: inherit; }
+
+.highcharts-solidgauge-series .highcharts-point {
+  stroke-width: 0; }
+
+.highcharts-treemap-series .highcharts-point {
+  stroke-width: 1px;
+  stroke: #2d2d42;
+  transition: stroke 250ms, fill 250ms, fill-opacity 250ms; }
+
+.highcharts-treemap-series .highcharts-point-hover {
+  stroke: #9AA5BC;
+  transition: stroke 25ms, fill 25ms, fill-opacity 25ms; }
+
+.highcharts-treemap-series .highcharts-above-level {
+  display: none; }
+
+.highcharts-treemap-series .highcharts-internal-node {
+  fill: none; }
+
+.highcharts-treemap-series .highcharts-internal-node-interactive {
+  fill-opacity: 0.15;
+  cursor: pointer; }
+
+.highcharts-treemap-series .highcharts-internal-node-interactive:hover {
+  fill-opacity: 0.75; }
+
+/* Legend */
+.highcharts-legend-box {
+  fill: none;
+  stroke-width: 0; }
+
+.highcharts-legend-item text {
+  fill: #9AA5BC;
+  font-weight: bold;
+  cursor: pointer;
+  stroke-width: 0; }
+
+.highcharts-legend-item:hover text {
+  fill: #9AA5BC; }
+
+.highcharts-legend-item-hidden * {
+  fill: #646b7a !important;
+  stroke: #646b7a !important;
+  transition: fill 250ms; }
+
+.highcharts-legend-nav-active {
+  fill: #9AA5BC;
+  cursor: pointer; }
+
+.highcharts-legend-nav-inactive {
+  fill: #646b7a; }
+
+.highcharts-legend-title-box {
+  fill: none;
+  stroke-width: 0; }
+
+/* Loading */
+.highcharts-loading {
+  position: absolute;
+  background-color: #242434;
+  opacity: 0.5;
+  text-align: center;
+  z-index: 10;
+  transition: opacity 250ms; }
+
+.highcharts-loading-hidden {
+  height: 0 !important;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 250ms, height 250ms step-end; }
+
+.highcharts-loading-inner {
+  font-weight: bold;
+  position: relative;
+  top: 45%; }
+
+/* Plot bands and polar pane backgrounds */
+.highcharts-plot-band {
+  fill: #9AA5BC;
+  fill-opacity: 0.05; }
+
+.highcharts-plot-line {
+  fill: none;
+  stroke: #9AA5BC;
+  stroke-width: 1px; }
+
+/* Highcharts More */
+.highcharts-boxplot-box {
+  fill: #242434; }
+
+.highcharts-boxplot-median {
+  stroke-width: 2px; }
+
+.highcharts-bubble-series .highcharts-point {
+  fill-opacity: 0.5; }
+
+.highcharts-errorbar-series .highcharts-point {
+  stroke: #9AA5BC; }
+
+.highcharts-gauge-series .highcharts-data-label-box {
+  stroke: #646b7a;
+  stroke-width: 1px; }
+
+.highcharts-gauge-series .highcharts-dial {
+  fill: #9AA5BC;
+  stroke-width: 0; }
+
+.highcharts-polygon-series .highcharts-graph {
+  fill: inherit;
+  stroke-width: 0; }
+
+.highcharts-waterfall-series .highcharts-graph {
+  stroke: #9AA5BC;
+  stroke-dasharray: 1, 3; }
+
+/* Highstock */
+.highcharts-navigator-mask {
+  fill: #9AA5BC;
+  /* navigator.maskFill option */
+  fill-opacity: 0.25; }
+
+.highcharts-navigator-mask-inside {
+  fill: #9AA5BC;
+  /* navigator.maskFill option */
+  fill-opacity: 0.25;
+  cursor: ew-resize; }
+
+.highcharts-navigator-outline {
+  stroke: #646b7a;
+  fill: none; }
+
+.highcharts-navigator-handle {
+  stroke: #646b7a;
+  fill: #2d2d42;
+  cursor: ew-resize; }
+
+.highcharts-navigator-series {
+  fill: #9AA5BC;
+  stroke: #9AA5BC; }
+
+.highcharts-navigator-series .highcharts-graph {
+  stroke-width: 1px; }
+
+.highcharts-navigator-series .highcharts-area {
+  fill-opacity: 0.05; }
+
+.highcharts-navigator-xaxis .highcharts-axis-line {
+  stroke-width: 0; }
+
+.highcharts-navigator-xaxis .highcharts-grid-line {
+  stroke-width: 1px;
+  stroke: #2d2d42; }
+
+.highcharts-navigator-xaxis.highcharts-axis-labels {
+  fill: #9AA5BC; }
+
+.highcharts-navigator-yaxis .highcharts-grid-line {
+  stroke-width: 0; }
+
+.highcharts-scrollbar-thumb {
+  fill: #646b7a;
+  stroke: #646b7a;
+  stroke-width: 1px; }
+
+.highcharts-scrollbar-button {
+  fill: #2d2d42;
+  stroke: #646b7a;
+  stroke-width: 1px; }
+
+.highcharts-scrollbar-arrow {
+  fill: #9AA5BC; }
+
+.highcharts-scrollbar-rifles {
+  stroke: #9AA5BC;
+  stroke-width: 1px; }
+
+.highcharts-scrollbar-track {
+  fill: #2d2d42;
+  stroke: #2d2d42;
+  stroke-width: 1px; }
+
+.highcharts-button {
+  fill: #9AA5BC;
+  stroke: #646b7a;
+  cursor: default;
+  stroke-width: 1px;
+  transition: fill 250ms; }
+
+.highcharts-button text {
+  fill: #9AA5BC; }
+
+.highcharts-button-hover {
+  transition: fill 0ms;
+  fill: #2d2d42;
+  stroke: #9AA5BC; }
+
+.highcharts-button-pressed {
+  font-weight: bold;
+  fill: #e6ebf5;
+  stroke: #9AA5BC; }
+
+.highcharts-button-disabled text {
+  fill: #646b7a; }
+
+.highcharts-range-selector-buttons .highcharts-button {
+  stroke-width: 0;
+  font-family: 'Avenir-Next-Demibold', Verdana, Geneva, sans-serif;
+  z-index: 1; }
+
+.highcharts-range-label rect {
+  fill: none; }
+
+.highcharts-range-label text {
+  fill: #9AA5BC; }
+
+.highcharts-range-input rect {
+  fill: none; }
+
+.highcharts-range-input text {
+  fill: #9AA5BC; }
+
+input.highcharts-range-selector {
+  position: absolute;
+  border: 0;
+  width: 1px;
+  /* Chrome needs a pixel to see it */
+  height: 1px;
+  padding: 0;
+  text-align: center;
+  left: -9em;
+  /* #4798 */ }
+
+.highcharts-crosshair-label text {
+  fill: #242434;
+  font-size: 1.1em; }
+
+.highcharts-crosshair-label .highcharts-label-box {
+  fill: inherit; }
+
+.highcharts-candlestick-series .highcharts-point {
+  stroke: #9AA5BC;
+  stroke-width: 1px; }
+
+.highcharts-candlestick-series .highcharts-point-up {
+  fill: #242434; }
+
+.highcharts-ohlc-series .highcharts-point-hover {
+  stroke-width: 3px; }
+
+.highcharts-flags-series .highcharts-point {
+  stroke: #9AA5BC;
+  fill: #242434; }
+
+.highcharts-flags-series .highcharts-point-hover {
+  stroke: #9AA5BC;
+  fill: #9AA5BC; }
+
+.highcharts-flags-series .highcharts-point text {
+  fill: #9AA5BC;
+  font-size: 0.9em;
+  font-weight: bold; }
+
+/* Highmaps */
+.highcharts-map-series .highcharts-point {
+  transition: fill 500ms, fill-opacity 500ms, stroke-width 250ms;
+  stroke: #646b7a; }
+
+.highcharts-map-series .highcharts-point-hover {
+  transition: fill 0ms, fill-opacity 0ms;
+  fill-opacity: 0.5;
+  stroke-width: 2px; }
+
+.highcharts-mapline-series .highcharts-point {
+  fill: none; }
+
+.highcharts-heatmap-series .highcharts-point {
+  stroke-width: 0; }
+
+.highcharts-map-navigation {
+  font-size: 1.3em;
+  font-weight: bold;
+  text-align: center; }
+
+.highcharts-coloraxis {
+  stroke-width: 0; }
+
+.highcharts-coloraxis-marker {
+  fill: #9AA5BC; }
+
+.highcharts-null-point {
+  fill: #9AA5BC; }
+
+/* 3d charts */
+.highcharts-3d-frame {
+  fill: transparent; }
+
+.highcharts-column-series .highcharts-point {
+  stroke: inherit;
+  /* use point color */ }
+
+/* Exporting module */
+.highcharts-contextbutton {
+  fill: #242434;
+  /* needed to capture hover */
+  stroke: none;
+  stroke-linecap: round; }
+
+.highcharts-contextbutton:hover {
+  fill: #2d2d42;
+  stroke: #2d2d42; }
+
+.highcharts-button-symbol {
+  stroke: #9AA5BC;
+  stroke-width: 3px; }
+
+.highcharts-menu {
+  border: 1px solid #9AA5BC;
+  background: #242434;
+  padding: 5px 0;
+  box-shadow: 3px 3px 10px #888; }
+
+.highcharts-menu-item {
+  padding: 0.5em 1em;
+  background: none;
+  color: #9AA5BC;
+  cursor: pointer;
+  transition: background 250ms, color 250ms; }
+
+.highcharts-menu-item:hover {
+  background: #9AA5BC;
+  color: #242434; }
+
+/* Drilldown module */
+.highcharts-drilldown-point {
+  cursor: pointer; }
+
+.highcharts-drilldown-data-label text, .highcharts-drilldown-axis-label {
+  cursor: pointer;
+  fill: #9AA5BC;
+  font-weight: bold;
+  text-decoration: underline; }
+
+/* No-data module */
+.highcharts-no-data text {
+  font-weight: bold;
+  font-size: 12px;
+  fill: #9AA5BC; }
+
+#Graph {
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+
+.tooltip {
+  border-left: 10px; }
+
+/*
+ *  Usage:
+ *
+      <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+      </div>
+ *
+ */
+.sk-folding-cube, .App .LoadingIcon {
+  margin: 40px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  transform: rotateZ(45deg); }
+  .sk-folding-cube .sk-cube, .App .LoadingIcon .sk-cube {
+    float: left;
+    width: 50%;
+    height: 50%;
+    position: relative;
+    transform: scale(1.1); }
+  .sk-folding-cube .sk-cube:before, .App .LoadingIcon .sk-cube:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #9AA5BC;
+    animation: sk-foldCubeAngle 2.4s infinite linear both;
+    transform-origin: 100% 100%; }
+  .sk-folding-cube .sk-cube2, .App .LoadingIcon .sk-cube2 {
+    transform: scale(1.1) rotateZ(90deg); }
+  .sk-folding-cube .sk-cube3, .App .LoadingIcon .sk-cube3 {
+    transform: scale(1.1) rotateZ(180deg); }
+  .sk-folding-cube .sk-cube4, .App .LoadingIcon .sk-cube4 {
+    transform: scale(1.1) rotateZ(270deg); }
+  .sk-folding-cube .sk-cube2:before, .App .LoadingIcon .sk-cube2:before {
+    animation-delay: 0.3s; }
+  .sk-folding-cube .sk-cube3:before, .App .LoadingIcon .sk-cube3:before {
+    animation-delay: 0.6s; }
+  .sk-folding-cube .sk-cube4:before, .App .LoadingIcon .sk-cube4:before {
+    animation-delay: 0.9s; }
+
+@keyframes sk-foldCubeAngle {
+  0%, 10% {
+    transform: perspective(140px) rotateX(-180deg);
+    opacity: 0; }
+  25%, 75% {
+    transform: perspective(140px) rotateX(0deg);
+    opacity: 1; }
+  90%, 100% {
+    transform: perspective(140px) rotateY(180deg);
+    opacity: 0; } }
+
+@font-face {
+  font-family: 'Avenir-Next-Regular';
+  src: url("../fonts/avenir-next-regular.woff2") format("woff2"), url("../fonts/avenir-next-regular.woff") format("woff"); }
+
+@font-face {
+  font-family: 'Avenir-Next-Medium';
+  src: url("../fonts/avenir-next-medium.woff2") format("woff2"), url("../fonts/avenir-next-medium.woff") format("woff"); }
+
+@font-face {
+  font-family: 'Avenir-Next-Demibold';
+  src: url("../fonts/avenir-next-demibold.woff2") format("woff2"), url("../fonts/avenir-next-demibold.woff") format("woff"); }
+
+@font-face {
+  font-family: 'Avenir-Next-Bold';
+  src: url("../fonts/avenir-next-bold.woff2") format("woff2"), url("../fonts/avenir-next-bold.woff") format("woff"); }
+
+@font-face {
+  font-family: 'Avenir-Next-Ultralight';
+  src: url("../fonts/avenir-next-ultralight.woff2") format("woff2"), url("../fonts/avenir-next-ultralight.woff") format("woff"); }
+
+.App {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Avenir-Next-Regular', Verdana, Geneva, sans-serif; }
+  .App .LoadingIcon {
+    width: 70px;
+    height: 70px; }
+  .App .container-left {
+    width: 20%;
+    min-width: 290px;
+    height: 100%;
+    background-color: #2F2F40; }
+  .App .container-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 80%;
+    height: 100%;
+    background-color: #242434; }
+
+.react-autosuggest__container {
+  width: 40%;
+  min-width: 300px;
+  margin-top: 10vh;
+  margin-left: 10vh;
+  z-index: 1;
+  overflow: visible;
+  box-shadow: 0 6px 10px 0 rgba(28, 28, 49, 0.14), 0 1px 18px 0 rgba(28, 28, 49, 0.12), 0 3px 5px -1px rgba(28, 28, 49, 0.4);
+  transition: all ease-out 0.1s;
+  height: auto; }
+  .react-autosuggest__container:hover {
+    box-shadow: 0 24px 38px 3px rgba(28, 28, 49, 0.14), 0 9px 46px 8px rgba(28, 28, 49, 0.12), 0 11px 15px -7px rgba(28, 28, 49, 0.4); }
+
+.react-autosuggest__input {
+  width: 100%;
+  height: 60px;
+  background-color: #2f2f40;
+  border: none;
+  padding-left: 55px;
+  font-family: 'Avenir-Next-Regular', Verdana, Geneva, sans-serif;
+  font-size: 1em;
+  color: #9AA5BC; }
+
+.inputContainer {
+  overflow: visible;
+  position: relative; }
+
+.react-autosuggest__suggestions-container {
+  width: 100%;
+  min-width: 300px;
+  z-index: 1;
+  background-color: #2f2f40; }
+
+.react-autosuggest__suggestions-container--open {
+  padding-bottom: 15px; }
+
+.react-autosuggest__suggestion .suggestion {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #9AA5BC;
+  height: 70px; }
+  .react-autosuggest__suggestion .suggestion .suggestion-left {
+    padding-left: 56px; }
+    .react-autosuggest__suggestion .suggestion .suggestion-left .suggestion-symbol {
+      font-family: 'Avenir-Next-Demibold', Verdana, Geneva, sans-serif;
+      font-size: 1.1em;
+      margin-bottom: 6px; }
+    .react-autosuggest__suggestion .suggestion .suggestion-left .suggestion-full-name {
+      font-size: 0.8em; }
+  .react-autosuggest__suggestion .suggestion .suggestion-right {
+    margin-right: 10%; }
+    .react-autosuggest__suggestion .suggestion .suggestion-right .add-stock-button {
+      display: block;
+      width: 30px;
+      height: 30px;
+      background: url("../images/add_stock_icon.svg");
+      background-size: 30px 30px; }
+      .react-autosuggest__suggestion .suggestion .suggestion-right .add-stock-button:hover {
+        background: url("../images/add_stock_icon_hover.svg");
+        background-size: 30px 30px; }
+    .react-autosuggest__suggestion .suggestion .suggestion-right .stock-added-button {
+      display: block;
+      width: 30px;
+      height: 30px;
+      background: url("../images/stock_added_icon.svg");
+      background-size: 30px 30px; }
+
+::-webkit-input-placeholder {
+  color: #777f91; }
+
+.react-autosuggest__input--focused {
+  outline: none; }
+
+.search-icon {
+  position: absolute;
+  top: 19px;
+  left: 19px;
+  width: 22px;
+  height: 22px;
+  background: url("../images/search_icon.svg");
+  background-size: 22px 22px; }
+
+body {
+  background-color: #242434;
+  overflow-x: hidden; }

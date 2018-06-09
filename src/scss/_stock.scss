@@ -1,0 +1,120 @@
+$icon-size: 30px 30px;
+$stock-height: 70px;
+
+.Stock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: $stock-height;
+  margin: 4px 0 4px 0;
+  position: relative;
+
+  .color-tab {
+    height: 100%;
+    width: 6px;
+  }
+
+  .stock-fly-in {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    width: 120px;
+    position: absolute;
+    height: $stock-height;
+    background-color: blue;
+    transition: transform .2s cubic-bezier(0.02, 0.51, 0.58, 1);
+  }
+
+  .stock-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    transition: transform .2s cubic-bezier(0.02, 0.51, 0.58, 1);
+  }
+
+  .stock-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 150px;
+    color: $text-color;
+    padding-left: calc(12% + 10px);
+
+    .stock-symbol {
+      font-family: 'Avenir-Next-Demibold', Verdana, Geneva, sans-serif;
+      font-size: 1.1em;
+      margin-bottom: 6px;
+    }
+
+    .stock-full-name {
+      font-size: 0.8em;
+    }
+  }
+
+  .stock-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 10%;
+
+    .stock-price {
+      margin-bottom: 5px;
+    }
+
+    .stock-changePercent {
+      font-size: 0.8em;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .stock-button {
+      display: block;
+      width: 30px;
+      height: 30px;
+    }
+
+    .stock-remove-button {
+      background: url("../images/delete_stock_icon.svg");
+      background-size: $icon-size;
+      margin-left: 16px;
+
+      &:hover {
+        background: url("../images/delete_stock_icon_hover.svg");
+        background-size: $icon-size;
+      }
+    }
+
+    .stock-view-show-button {
+      background: url("../images/view_show_icon_3.svg");
+      background-size: $icon-size;
+
+      &:hover {
+        background: url("../images/view_show_icon_hover_3.svg");
+        background-size: $icon-size;
+      }
+    }
+
+    .stock-view-hidden-button {
+      background: url("../images/view_hidden_icon.svg");
+      background-size: $icon-size;
+
+      &:hover {
+        background: url("../images/view_hidden_icon_hover.svg");
+        background-size: $icon-size;
+      }
+    }
+
+    .stock-view-button {
+      @extend .stock-button;
+    }
+  }
+}
